@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Inserir Novo Lugar</h2>
+<form method="POST" action="{% url 'lugares:create' %}">
+  {% csrf_token %}
+  <p>
+    <label for="id_name">Título:</label>
+    <input type="text" name="name" id="id_name" />
+  </p>
+  <p>
+    <label for="id_description">Descrição:</label>
+    <input type="number" name="description" id="id_description" />
+  </p>
+  <p>
+    <label for="id_image_url">URL de uma imagem:</label>
+    <input type="url" name="image_url" id="id_image_url" />
+  </p>
+  <button type="submit">Criar</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Todos os Lugares</h2>
+<section>
+    <p>
+      Muitos resultados? <a href="{% url 'lugares:search' %}">Buscar Lugares</a>
+    </p>
+    <p>
+      Não encontrou o lugar?
+      <a href="{% url 'lugares:create' %}">Adicionar Novo Lugar</a>
+    </p>
+  </section>
+{% if lugar_list %}
+<section class="lista-de-cards">
+  {% for lugar in lugar_list %}
+  <article class="card">
+    <a href="{% url 'lugares:detail' forloop.counter %}"
+      ><img src="{{ lugar.image_url }}" alt="Imagem do lugar {{ lugar.name}}"
+    /></a>
+    <p>{{ lugar.name }} ({{ lugar.description }})</p>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum lugar.</p>
+{% endif %} {% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %} {{ lugar.name }} ({{
+    lugar.description }} {% endblock title %} {% block content %}
+    <h2>Detalhes do Filme {{ lugar.name }} ({{ lugar.description }})</h2>
+    
+    <section class="dados-de-lugar">
+      <img src="{{ lugar.image_url }}" alt="Imagem do lugar {{ lugar.name}}" />
+      <ul>
+        <li>Nome: {{ lugar.name }}</li>
+        <li>Descrição: {{ lugar.description }}</li>
+      </ul>
+    </section>
+    
+    {% endblock content %}
