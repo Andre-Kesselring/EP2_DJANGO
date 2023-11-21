@@ -1,8 +1,8 @@
-from django.forms import ModelForm
-from .models import Post
+from django import forms
+from .models import Post, Comment
 
 
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = [
@@ -16,4 +16,16 @@ class PostForm(ModelForm):
             'descrption': 'Descrição',
             'content' : 'Sobre',
             'poster_url': 'URL do Poster',
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [
+            'author',
+            'text',
+        ]
+        labels = {
+            'author': 'Usuário',
+            'text': 'Comentário',
         }

@@ -14,5 +14,29 @@
         <li><a href="{% url 'lugares:delete' lugar.id %}">Apagar</a></li>
       </ul>
     </section>
-    
-    {% endblock content %}
+
+    <hr>
+
+<section>
+    <header>
+        <h3>Resenhas</h3>
+    </header>
+    <ul>
+        {% if lugar.comment_set.all %}
+            {% for comment in lugar.comment_set.all %}
+                <figure>
+                    <blockquote>
+                        "{{ comment.text }}"
+                    </blockquote>
+                    <figcaption>—{{ comment.author }} em {{ comment.date }}</figcaption>
+                </figure>
+            {% endfor %}
+        {% else %}
+            <p>Ainda não existe nenhum comentário para esse lugar.</p>
+        {% endif %}
+    </ul>
+    <a href="{% url 'lugares:comment' lugar.pk %}"><button>Crie seu comentário</button></a>
+</section>
+
+
+{% endblock content %}

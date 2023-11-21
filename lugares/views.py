@@ -3,13 +3,13 @@ from django.http import HttpResponse
 from .temp_data import lugar_data
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import Post
+from .models import Post, Comment
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.views import generic
 from django.views.generic import DetailView, ListView, CreateView , UpdateView , DeleteView
 from django.urls import reverse_lazy
-
+from .forms import PostForm, CommentForm
 
 
 # Create your views here.
@@ -61,3 +61,21 @@ class PostDeleteView(DeleteView):
     template_name = 'lugares/delete.html'
     context_object_name = 'lugar'
     success_url = reverse_lazy('lugares:index')
+
+def create_comment(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment_author = form.cleaned_data['author']
+            comment_text = form.cleaned_data['text']
+            comment = Comment(author=comment_author,
+                            text=comment_text,
+                            post=post)
+            comment.save()
+            return HttpResponseRedirect(
+                reverse('lugares:detail', args=(post_id, )))
+    else:
+        form = CommentForm()
+    context = {'form': form, 'post': post}
+    return render(request, 'lugares/comment.html', context)
