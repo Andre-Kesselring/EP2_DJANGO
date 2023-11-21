@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .models import Post
 from django.shortcuts import render, get_object_or_404
+from .forms import PostForm
 
 # Create your views here.
 
@@ -48,7 +49,10 @@ def create_lugar(request):
         return HttpResponseRedirect(
             reverse('lugares:detail', args=(lugar.id, )))
     else:
-        return render(request, 'lugares/create.html', {})
+        form = PostForm()
+        context = {'form': form}
+        return render(request, 'lugares/create.html', context)
+
     
 def list_lugares(request):
     lugar_list = Post.objects.all()
