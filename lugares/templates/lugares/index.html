@@ -16,7 +16,7 @@
     <a href="{% url 'lugares:detail' lugar.id %}"
       ><img src="{{ lugar.poster_url }}" alt="Imagem de {{ lugar.name}}"
     /></a>
-    <p>{{ lugar.name }} ({{ lugar.description }})</p>
+    <p>{{ lugar.name }}</p>
   </article>
   {% endfor %}
 </section>

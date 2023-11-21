@@ -9,6 +9,9 @@
         <li>Sobre: {{ lugar.content }}</li>
         <hr>
         <li>Data de post: {{ lugar.creation_date }}</li>
+        <hr>
+        <li><a href="{% url 'lugares:update' lugar.id %}">Editar</a></li>
+        <li><a href="{% url 'lugares:delete' lugar.id %}">Apagar</a></li>
       </ul>
     </section>
     

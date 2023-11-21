@@ -54,3 +54,29 @@ def list_lugares(request):
     lugar_list = Post.objects.all()
     context = {'lugar_list': lugar_list}
     return render(request, 'lugares/index.html', context)
+
+def update_lugar(request, lugar_id):
+    lugar = get_object_or_404(Post, pk=lugar_id)
+
+    if request.method == "POST":
+        lugar.name = request.POST['name']
+        lugar.description = request.POST['description']
+        lugar.content = request.POST['content']
+        lugar.poster_url = request.POST['poster_url']
+        lugar.save()
+        return HttpResponseRedirect(
+            reverse('lugares:detail', args=(lugar.id, )))
+
+    context = {'lugar': lugar}
+    return render(request, 'lugares/update.html', context)
+
+
+def delete_lugar(request, lugar_id):
+    lugar = get_object_or_404(Post, pk=lugar_id)
+
+    if request.method == "POST":
+        lugar.delete()
+        return HttpResponseRedirect(reverse('lugares:index'))
+
+    context = {'lugar': lugar}
+    return render(request, 'lugares/delete.html', context)
