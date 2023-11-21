@@ -13,8 +13,8 @@
 <section class="lista-de-cards">
   {% for lugar in lugar_list %}
   <article class="card">
-    <a href="{% url 'lugares:detail' forloop.counter %}"
-      ><img src="{{ lugar.image_url }}" alt="Imagem do lugar {{ lugar.name}}"
+    <a href="{% url 'lugares:detail' lugar.id %}"
+      ><img src="{{ lugar.poster_url }}" alt="Imagem de {{ lugar.name}}"
     /></a>
     <p>{{ lugar.name }} ({{ lugar.description }})</p>
   </article>
