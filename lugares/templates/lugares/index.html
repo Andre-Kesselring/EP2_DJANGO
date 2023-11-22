@@ -11,12 +11,12 @@
   </section>
 {% if lugar_list %}
 <section class="lista-de-cards">
-  {% for lugar in lugar_list %}
+  {% for post in lugar_list %}
   <article class="card">
-    <a href="{% url 'lugares:detail' lugar.id %}"
-      ><img src="{{ lugar.poster_url }}" alt="Imagem de {{ lugar.name}}"
+    <a href="{% url 'lugares:detail' post.id %}"
+      ><img src="{{ post.poster_url }}" alt="Imagem de {{ post.name}}"
     /></a>
-    <p>{{ lugar.name }}</p>
+    <p>{{ post.name }} - {{ post.description }}</p>
   </article>
   {% endfor %}
 </section>

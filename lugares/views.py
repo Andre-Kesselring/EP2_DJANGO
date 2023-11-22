@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .temp_data import lugar_data
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.views import generic
@@ -79,3 +79,39 @@ def create_comment(request, post_id):
         form = CommentForm()
     context = {'form': form, 'post': post}
     return render(request, 'lugares/comment.html', context)
+
+class CategoryListView(generic.ListView):
+    model = Category
+    template_name = 'lugares/category.html'
+    context_object_name = 'category_list'
+
+class CategoryPostsListView(generic.ListView):
+    template_name = 'lugares/index.html'
+    context_object_name = 'post_list'
+
+    def get_category(self):
+        return Category.objects.get(pk=self.kwargs['category_id'])
+
+    def get_queryset(self):
+        return self.get_category().posts.all()
+    
+    def get_context_data(self, **kwargs):
+        category = self.get_category()
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Categoria'
+        context['lugarpage_title'] = f'Categoria {category.name}'
+        context['category'] = True
+        context['category_id'] = category.id
+        return context
+
+class CategoryPostDetailView(generic.DetailView):
+    model = Post
+    template_name = 'lugares/detail.html'
+
+    def get_object(self):
+        category_id = self.kwargs.get('category_id')
+        pk = self.kwargs.get('pk')
+        category = Category.objects.get(pk=category_id)
+        posts = category.posts.all()
+        post = get_object_or_404(posts, pk=pk) 
+        return post
