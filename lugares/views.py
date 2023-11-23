@@ -19,11 +19,17 @@ class PostListView(ListView):
     template_name = 'lugares/index.html'
     context_object_name = 'lugar_list'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Lugares'
+        context['lugarpage_title'] = 'Encontre o lugar ideal!!!!!!!!!!!!!!!!!!'
+        context['category'] = False
+        return context
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'lugares/detail.html'
     context_object_name = 'lugar'
-    pk_url_kwarg = 'lugar_id'
 
 class PostSearchView(ListView):
     model = Post
@@ -87,7 +93,7 @@ class CategoryListView(generic.ListView):
 
 class CategoryPostsListView(generic.ListView):
     template_name = 'lugares/index.html'
-    context_object_name = 'post_list'
+    context_object_name = 'lugar_list'
 
     def get_category(self):
         return Category.objects.get(pk=self.kwargs['category_id'])
@@ -99,7 +105,7 @@ class CategoryPostsListView(generic.ListView):
         category = self.get_category()
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Categoria'
-        context['lugarpage_title'] = f'Categoria {category.name}'
+        context['lugarpage_title'] =    "HEYYYY" ##f'Categoria {category.name}'
         context['category'] = True
         context['category_id'] = category.id
         return context

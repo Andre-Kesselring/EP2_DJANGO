@@ -1,5 +1,22 @@
-{% extends 'base.html' %} {% block content %}
-<h2>Todos os Lugares</h2>
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+
+{% if not category %}
+
+<h2 id="lugarpage-title">{{ lugarpage_title }}</h2>
+
+{% else %}
+
+<h2 id="lugarpage-title">{{ lugarpage_title }}</h2>
+
+
+{% endif %}
+
+
 <section>
     <p>
       Muitos resultados? <a href="{% url 'lugares:search' %}">Buscar Lugares</a>
@@ -9,17 +26,39 @@
       <a href="{% url 'lugares:create' %}">Adicionar Novo Lugar</a>
     </p>
   </section>
+  
 {% if lugar_list %}
+ 
 <section class="lista-de-cards">
   {% for post in lugar_list %}
-  <article class="card">
+  <article class="card">   
+    <div class="card-content">
+    {% if not category %}
+
     <a href="{% url 'lugares:detail' post.id %}"
-      ><img src="{{ post.poster_url }}" alt="Imagem de {{ post.name}}"
-    /></a>
-    <p>{{ post.name }} - {{ post.description }}</p>
+    ><img src="{{ post.poster_url }}" alt="Imagem de {{ post.name}}"
+  /></a>
+  <p>{{ post.name }} - {{ post.description }}</p>
+
+    {% else %}
+
+    <a href="{% url 'lugares:category-post-detail' category.id post.id %}">
+        <img src="{{ post.poste_url }}" alt="Imagem de {{ post.name }}" />
+    </a>
+
+
+    {% endif %}
+    </div>
   </article>
   {% endfor %}
 </section>
+
+
+
+
 {% else %}
 <p>Não foi encontrado nenhum lugar.</p>
 {% endif %} {% endblock content %}
+
+
+

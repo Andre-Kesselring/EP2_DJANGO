@@ -8,7 +8,7 @@
         <li>Nome: {{ lugar.name }} - {{ lugar.description }}</li>
         <li>Sobre: {{ lugar.content }}</li>
         <hr>
-        <li>Data de post: {{ lugar.creation_date }}</li>
+        <li>Data de lugar: {{ lugar.creation_date }}</li>
         <hr>
         <li><a href="{% url 'lugares:update' lugar.id %}">Editar</a></li>
         <li><a href="{% url 'lugares:delete' lugar.id %}">Apagar</a></li>

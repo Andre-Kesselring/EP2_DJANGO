@@ -19,8 +19,8 @@
         <a href="{% url 'index' %}"> <img src="{% static 'logo.svg' %}"> </a> <!-- adicione esta linha -->
         <nav id="navegacao-principal">
             <ul>
-                <li><a href="{% url 'lugares:index' %}">Lugares</a></li>
-                <li><a href="{% url 'lugares:category' %}">Categorias</a></li> 
+                <li class="nav__item"><a href="{% url 'lugares:index' %}">Lugares</a></li>
+                <li class="nav__item"><a href="{% url 'lugares:category' %}">Categorias</a></li> 
                 <li><a href="{% url 'about' %}">Sobre</a></li>
             </ul>
         </nav>
