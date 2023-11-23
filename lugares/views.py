@@ -105,7 +105,7 @@ class CategoryPostsListView(generic.ListView):
         category = self.get_category()
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Categoria'
-        context['lugarpage_title'] =    "HEYYYY" ##f'Categoria {category.name}'
+        context['lugarpage_title'] = f'Categoria {category.name}'
         context['category'] = True
         context['category_id'] = category.id
         return context

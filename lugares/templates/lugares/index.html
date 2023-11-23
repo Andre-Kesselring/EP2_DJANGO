@@ -30,6 +30,9 @@
 {% if lugar_list %}
  
 <section class="lista-de-cards">
+
+
+
   {% for post in lugar_list %}
   <article class="card">   
     <div class="card-content">
@@ -42,15 +45,18 @@
 
     {% else %}
 
-    <a href="{% url 'lugares:category-post-detail' category.id post.id %}">
-        <img src="{{ post.poste_url }}" alt="Imagem de {{ post.name }}" />
-    </a>
+    
+    <a href="{% url 'lugares:detail' post.id %}"
+    ><img src="{{ post.poster_url }}" alt="Imagem de {{ post.name}}"
+    />{{ post.name }} - {{ post.description }}</a>
 
 
     {% endif %}
     </div>
   </article>
   {% endfor %}
+
+
 </section>
 
 

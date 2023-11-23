@@ -18,9 +18,12 @@
     <hr>
 
     <section> 
+
       {% if lugar.category_set.all %}
           <li>Incluso nas categorias: {{ lugar.category_set.all|join:", " }} </li>
       {% endif %}
+
+
     </section>
 
 
